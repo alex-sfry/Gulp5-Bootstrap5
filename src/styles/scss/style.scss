@@ -1,0 +1,31 @@
+@import 'fonts';
+@import "vars";
+@import "../../../node_modules/bootstrap/scss/functions.scss";
+@import "../../../node_modules/bootstrap/scss/variables.scss"; 
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html,
+body,
+.wrapper {
+    height: 100%;
+}
+
+button {
+    cursor: pointer;
+}
+
+.wrapper {
+    max-width: 1320px;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    grid-template-rows: 1fr;
+    row-gap: 16px;
+    align-items: center;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+}
