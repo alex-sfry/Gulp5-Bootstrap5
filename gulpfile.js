@@ -28,6 +28,10 @@ export const clean = async () => {
     return await deleteAsync(['./build/**/*', './templates/**/*']);
 };
 
+export const cleanTemplates = async () => {
+    return await deleteAsync(['./templates/**/*']);
+};
+
 export const html = () => {
     const destPath = prodMode ? './build/' : './templates/';
     return gulp.src('./src/*.html')
@@ -109,27 +113,13 @@ export const dev = gulp.series(
     webpackDev, watch
 );
 
-/* compile and minify Bootstrap with purgeCSS */
-export const bsProdPurge = gulp.series(
-    gulp.parallel(webpackBsDev, webpackDev), gulp.parallel(bsStyles, webpackBsProd), purgeCSS, bsStylesMin
-);
-
 /* compile and minify Bootstrap w/o purgeCSS */
 export const bsProd = gulp.series(
+    gulp.parallel(pugTask, html, vendorJSProd),
     gulp.parallel(webpackBsDev, webpackDev),
     gulp.parallel(bsStyles, webpackBsProd),
-    bsStylesMin
-);
-
-/* minify everything (incl. Bootstrap) w/o purgeCSS */
-export const minAll = gulp.series(
-    setModeProd,
-    clean,
-    gulp.series(
-        gulp.parallel(pugTask, html, vendorJSProd),
-        bsProd,
-        webpackProd
-    ),
+    bsStylesMin,
+    cleanTemplates
 );
 
 /* minify everything (incl. Bootstrap) with purgeCSS */
@@ -138,16 +128,11 @@ export const buildPurge = gulp.series(
     clean,
     gulp.series(
         gulp.parallel(pugTask, html, vendorJSProd),
-        bsProdPurge,
-        webpackProd
+        gulp.parallel(webpackBsDev, webpackDev),
+        gulp.parallel(bsStyles, webpackBsProd), purgeCSS, bsStylesMin,
+        webpackProd,
+        cleanTemplates
     )
 );
 
-/* minify all w/o bootstrap */
-export const build = gulp.series(
-    setModeProd,
-    clean,
-    gulp.series(gulp.parallel(pugTask, html, vendorJSProd), webpackProd)
-);
-
-export default dev;
+export default devBs;

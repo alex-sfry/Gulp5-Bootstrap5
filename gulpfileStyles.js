@@ -33,10 +33,11 @@ export const purgeCSS = () => {
     return gulp.src('./templates/css/bootstrap.css')
         .pipe(purgecss({
             content: [
-                './build/**/*.js',
+                './templates/**/*.js',
+                './src/**/*.js',
                 './build/**/*.html',
             ],
             sourceMap: true
         }))
-        .pipe(gulp.dest('./build/css/'));
+        .pipe(gulp.dest('./templates/css/'));
 };
