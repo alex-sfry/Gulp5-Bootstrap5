@@ -99,8 +99,7 @@ export const watch = () => {
 export const devBs = gulp.series(
     enableSync,
     clean,
-    bsStyles,
-    gulp.parallel(pugTask, html, vendorJS, webpackBsDev),
+    gulp.parallel(pugTask, html, vendorJS, bsStyles, webpackBsDev),
     webpackDev,
     watch
 );
@@ -119,6 +118,7 @@ export const bsProd = gulp.series(
     gulp.parallel(webpackBsDev, webpackDev),
     gulp.parallel(bsStyles, webpackBsProd),
     bsStylesMin,
+    webpackProd,
     cleanTemplates
 );
 
@@ -129,7 +129,9 @@ export const buildPurge = gulp.series(
     gulp.series(
         gulp.parallel(pugTask, html, vendorJSProd),
         gulp.parallel(webpackBsDev, webpackDev),
-        gulp.parallel(bsStyles, webpackBsProd), purgeCSS, bsStylesMin,
+        gulp.parallel(bsStyles, webpackBsProd),
+        purgeCSS,
+        bsStylesMin,
         webpackProd,
         cleanTemplates
     )
