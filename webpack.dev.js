@@ -4,14 +4,13 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default {
-    mode: 'production',
+    mode: 'development',
     entry: {
-        main: './src/js/main.js',
         bootstrap: './src/js/bootstrap.js',
     },
     output: {
         publicPath: '/',
-        filename: '[name].min.js',
+        filename: '[name].dev.js',
         // path: path.resolve(__dirname, 'dist'),
         // clean: false
     },
