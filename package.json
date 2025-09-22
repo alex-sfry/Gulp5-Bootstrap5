@@ -12,28 +12,26 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@babel/core": "7.27.1",
-        "@babel/preset-env": "7.27.2",
+        "@babel/core": "7.28.4",
+        "@babel/preset-env": "7.28.3",
         "autoprefixer": "10.4.21",
         "babel-loader": "10.0.0",
-        "cssnano": "7.0.7",
-        "del": "8.0.0",
-        "gulp": "5.0.0",
+        "cssnano": "7.1.1",
+        "del": "8.0.1",
+        "gulp": "5.0.1",
         "gulp-plumber": "1.2.1",
         "gulp-postcss": "10.0.0",
-        "gulp-purgecss": "7.0.2",
-        "gulp-rename": "^2.0.0",
+        "gulp-rename": "2.1.0",
         "gulp-sass": "6.0.1",
-        "gulp-sourcemaps": "3.0.0",
-        "postcss": "8.5.3",
+        "postcss": "8.5.6",
         "postcss-nested": "7.0.2",
-        "postcss-preset-env": "10.1.6",
+        "postcss-preset-env": "10.4.0",
         "sass": "1.77.6",
-        "webpack": "5.99.9",
+        "webpack": "5.101.3",
         "webpack-cli": "5.1.4",
         "webpack-stream": "7.0.0"
     },
     "dependencies": {
-        "bootstrap": "^5.3.6"
+        "bootstrap": "5.3.8"
     }
 }
