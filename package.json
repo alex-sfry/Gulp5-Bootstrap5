@@ -1,11 +1,11 @@
 {
-    "name": "gulp-postcss-bootstrap",
+    "name": "html-scss-js",
     "version": "1.0.0",
     "description": "",
     "main": "main.js",
     "type": "module",
     "scripts": {
-        "start": "browser-sync start --config bs-config.cjs",
+        "start": "gulp build",
         "build": "gulp build"
     },
     "keywords": [],
@@ -14,6 +14,7 @@
     "devDependencies": {
         "@babel/core": "7.28.4",
         "@babel/preset-env": "7.28.3",
+        "@fullhuman/postcss-purgecss": "6.0.0",
         "autoprefixer": "10.4.21",
         "babel-loader": "10.0.0",
         "cssnano": "7.1.1",
@@ -26,7 +27,7 @@
         "postcss": "8.5.6",
         "postcss-preset-env": "10.4.0",
         "sass": "1.77.6",
-        "webpack": "5.101.3",
+        "webpack": "5.102.1",
         "webpack-cli": "5.1.4",
         "webpack-stream": "7.0.0"
     },

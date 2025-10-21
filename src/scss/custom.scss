@@ -1,0 +1,4 @@
+@use 'vars';
+@use 'bootstrap' with (
+    $danger: vars.$main-background
+)

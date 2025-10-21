@@ -11,13 +11,10 @@ export default {
     output: {
         publicPath: '/',
         filename: '[name].dev.js',
-        // path: path.resolve(__dirname, 'dist'),
-        // clean: false
     },
     resolve: {
         extensions: ['.js']
     },
-    devtool: 'source-map',
     optimization: {
         usedExports: true,
         minimize: true,

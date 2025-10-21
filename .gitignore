@@ -21,3 +21,4 @@ Thumbs.db
 .vscode
 .svn
 node_modules
+dist
