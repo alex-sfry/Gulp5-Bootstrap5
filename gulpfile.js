@@ -46,6 +46,8 @@ const htmlStrReplacements = [
     { searchVal: /js\/main.js/g, replacement: 'js/main.min.js' }
 ];
 
+let pCss = false;
+
 const sass = gulpSass(dartSass);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -74,6 +76,11 @@ export const updateHtmlLinks = () => {
 
         await replaceInFiles(files, htmlStrReplacements);
     })();
+}
+
+const pCssOn = (cb) => {
+    pCss = true;
+    cb();
 }
 
 export const clean = async () => {
@@ -108,19 +115,12 @@ export const scss = () => {
 };
 
 export const postCss = () => {
-    const plugins = [
-        autoprefixer(),
-        cssnano({ preset: ['default', { discardComments: { removeAll: true } }] }),
-        purgecss({
-            content: [
-                './src/**/*.html',
-                './src/**/*.js',
-                '!./src/js/bootstrap.bundle.min.js'
-            ],
-            safelist: ['tooltip', 'tooltip-arrow', 'bs-tooltip-auto', 'tooltip-inner'],
-            variables: true
-        })
-    ];
+    const plugins = [autoprefixer(), cssnano({ preset: ['default', { discardComments: { removeAll: true } }] })];
+    pCss && plugins.push(purgecss({
+        content: ['./src/**/*.html', './src/**/*.js', '!./src/js/bootstrap.bundle.min.js'],
+        safelist: ['tooltip', 'tooltip-arrow', 'bs-tooltip-auto', 'tooltip-inner'],
+        variables: true
+    }));
 
     return gulp.src(src.css)
         .pipe(plumber())
@@ -151,5 +151,12 @@ export const watch = () => {
 
 export const dev = gulp.series(gulp.parallel(scss, scssBs, wpDev), watch);
 export const build = gulp.series(clean, gulp.parallel(scss, scssBs, wp), gulp.parallel(move, postCss), updateHtmlLinks);
+export const buildP = gulp.series(
+    pCssOn,
+    clean,
+    gulp.parallel(scss, scssBs, wp),
+    gulp.parallel(move, postCss),
+    updateHtmlLinks
+);
 
 export default dev;
